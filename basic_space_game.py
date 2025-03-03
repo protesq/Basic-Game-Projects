@@ -7,6 +7,19 @@ class Oyun:
         self.genislik = 160
         self.yukseklik = 120
         
+        # Oyun değişkenlerini başlat
+        self.oyunu_baslat()
+        
+        # Pyxel başlatma
+        pyxel.init(self.genislik, self.yukseklik, title="Uzay Oyunu")
+        
+        # Sprite'ları oluştur
+        self.sprite_olustur()
+        
+        # Oyun döngüsünü başlat
+        pyxel.run(self.guncelle, self.ciz)
+    
+    def oyunu_baslat(self):
         # Oyuncu gemisi
         self.oyuncu_x = self.genislik // 2
         self.oyuncu_y = self.yukseklik - 20
@@ -24,14 +37,6 @@ class Oyun:
         
         # Oyun durumu
         self.oyun_aktif = True
-        
-        # Pyxel başlatma
-        pyxel.init(self.genislik, self.yukseklik, title="Uzay Oyunu")
-        
-        # Sprite'ları oluştur
-        self.sprite_olustur()
-        
-        pyxel.run(self.guncelle, self.ciz)
     
     def sprite_olustur(self):
         # Oyuncu gemisi sprite'ı
@@ -65,7 +70,7 @@ class Oyun:
         
         if not self.oyun_aktif:
             if pyxel.btnp(pyxel.KEY_R):
-                self.__init__()
+                self.oyunu_baslat()
             return
         
         # Oyuncu hareketi
@@ -136,4 +141,5 @@ class Oyun:
             pyxel.text(self.genislik // 2 - 30, self.yukseklik // 2, f"OYUN BITTI! PUAN: {self.puan}", 7)
             pyxel.text(self.genislik // 2 - 40, self.yukseklik // 2 + 10, "TEKRAR BASLAMAK ICIN 'R' TUSUNA BASIN", 7)
 
+# Oyunu başlat
 Oyun() 
